@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/querydsl
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      #      ddl-auto: none
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+        # QueryDSL 쿼리 로그보기
+        use_sql_comments: true
+        # in 쿼리로 조회 가능하게 하는 옵션
+        # LAZY 로 조회를 하면 OneToMany 일경우 루프를 돌면서 1건씩 조회를 하기 때문에 성능 저하 요소가 됨
+        # Max : 1000
+        default_batch_fetch_size: 1000
+    # 트랜젝션을 서비스의 트랜젝션안에서만 영속성을 유지함
+    # 즉, 컨트롤러에서 지연로딩을 할경우 500에러 발생
+    # 장점은 DB와 트랜잭션을 오래 유지하지 않음
+    # 단점은 컨트롤러등 서비스외 다른곳에서 지연로딩을 발생시 킬 수 없음
+    open-in-view: true
+
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+#    org.hibernate.type: trace
