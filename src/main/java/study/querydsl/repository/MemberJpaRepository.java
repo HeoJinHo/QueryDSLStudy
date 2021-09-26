@@ -116,11 +116,11 @@ public class MemberJpaRepository {
                 )
                 .from(member)
                 .where(
-                        searchAllCon(condition)
-//                        userNameEq(condition.getUserName()),
-//                        teamNameEq(condition.getTeamName()),
-//                        userAgeGoe(condition.getAgeGoe()),
-//                        userAgeLoe(condition.getAgeLoe())
+//                        searchAllCon(condition)
+                        userNameEq(condition.getUserName()),
+                        teamNameEq(condition.getTeamName()),
+                        userAgeGoe(condition.getAgeGoe()),
+                        userAgeLoe(condition.getAgeLoe())
                 )
                 .join(member.team, team)
                 .fetch();
